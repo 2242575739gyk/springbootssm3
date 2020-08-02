@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+            color:antiquewhite;
+        }
+        span{
+            font-size: 14px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 80%;
+        }
+        table,td,th{
+            border:1px solid darkmagenta;
+        }
+    </style>
+</head>
+<body>
+<span>修改员工</span>
+<form th:action="@{/emp/UpdateEmp}" th:object="${emp}" method="post" enctype="multipart/form-data">
+       <table  >
+           <input name="eid" type="hidden" th:value="${e.eid}">
+           <input name="photo" type="hidden" th:value="${e.photo}">
+           <tr >
+               <td>姓名</td>
+               <td>
+                   <input name="ename" th:type="text" th:value="${e.ename}">
+               </td>
+           </tr>
+           <tr>
+               <td>工作</td>
+               <td>
+                   <input name="job" th:type="text" th:value="${e.job}">
+               </td>
+           </tr>
+           <tr>
+           <td>薪资</td>
+           <td>
+               <input name="age" th:type="number" th:value="${e.age}">
+           </td>
+       </tr>
+           <tr>
+           <td>生日</td>
+           <td>
+               <input name="birthday" th:type="date"
+                      th:value="${#dates.format(e.birthday, 'yyyy-MM-dd')}"
+               >
+           </td>
+       </tr>
+           <tr>
+           <td>照片</td>
+           <td>
+               <input name="pic" th:type="file">
+               <img th:src="@{${e.photo}}" width="80px" height="80px">
+           </td>
+       </tr>
+           <tr>
+               <td>所在部门</td>
+               <td>
+                   <select name="did" >
+                       <option th:value="0">--请选择--</option>
+                       <option  th:selected="${dept.did eq e.did}" th:each="dept:${ld22}" th:text="${dept.dname}"  th:value="${dept.did}"></option>
+                   </select>
+               </td>
+           </tr>
+
+
+
+
+
+       </table>
+    <input th:type="submit" value="添加">
+</form>
+
+</body>
+</html>
